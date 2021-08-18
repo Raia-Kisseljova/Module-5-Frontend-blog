@@ -36,3 +36,43 @@
     transform: rotate(360deg);
   }
 }
+
+.nav-color {
+  background-color: #89e5ff;
+}
+
+.custom-form {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.custom-cat {
+  width: 300px;
+}
+
+.custom-title {
+  width: 300px;
+}
+.custom-content {
+  width: 400px;
+  height: 150px;
+  margin-bottom: 25px;
+}
+
+.preview {
+  width: 200px;
+}
+
+.uploaded-img {
+  width: 250px;
+  margin-top: 35px;
+  object-fit: cover;
+}
+
+.warning {
+  color: rgb(78, 78, 78);
+  font-size: 13px;
+  margin-top: 15px;
+}
