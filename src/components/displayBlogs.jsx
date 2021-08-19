@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import React from "react";
-import { Row, Col, Container } from "react-bootstrap";
+import { Row, Col, Button } from "react-bootstrap";
 
 function DisplayBlogs() {
   const [fetchedPosts, setFetchedPosts] = useState([]);
@@ -19,7 +19,7 @@ function DisplayBlogs() {
         {fetchedPosts.map((post) => {
           return (
             <Col lg={4} md={4} sm={4} xs={4}>
-              <div className="blog-div">
+              <div className="blog-div" key={post.id}>
                 <div>
                   <img
                     src={
@@ -33,6 +33,21 @@ function DisplayBlogs() {
                 <h5>{post.title}</h5>
                 <span>{post.category}</span>
                 <p>{post.content}</p>
+                <div>
+                  <Button variant="outline-info">Edit</Button>{" "}
+                  <Button
+                    variant="outline-danger"
+                    onClick={() =>
+                      fetch(`http://localhost:3001/blogPosts/${post.id}`, {
+                        method: "DELETE",
+                      })
+                        .then((response) => response.json())
+                        .then((data) => console.log(data))
+                    }
+                  >
+                    Delete
+                  </Button>{" "}
+                </div>
               </div>
             </Col>
           );

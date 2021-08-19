@@ -4,7 +4,6 @@ import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import { withRouter } from "react-router-dom";
 import { useHistory } from "react-router";
-import DisplayBlogs from "./displayBlogs";
 
 function FormPost() {
   const history = useHistory();
@@ -12,23 +11,25 @@ function FormPost() {
   const categoryRef = React.createRef();
   // const contentRef = React.createRef();
   const [imagePreview, setImagePreview] = React.useState({
-    text: "",
     image: { file: null },
     previewURL: "",
   });
 
-  function handleChange(value) {
-    setImagePreview({ ...imagePreview, text: value });
-  }
+  const [value, setValue] = React.useState("");
+
+  // function handleChange(value) {
+  //   setImagePreview({ ...imagePreview, text: value });
+  // }
 
   async function handleSubmit(e) {
     console.log(history);
     e.preventDefault();
     console.log();
+
     const body = {
       title: titleRef.current.value,
       category: categoryRef.current.value,
-      // content: contentRef.current.value,
+      content: value,
     };
 
     const response = await fetch("http://localhost:3001/blogPosts", {
@@ -117,9 +118,11 @@ function FormPost() {
         </FormGroup>
         <Form.Group controlId="blog-content" className="mt-3 ">
           <Form.Label>Blog Content</Form.Label>
+
           <ReactQuill
-            value={imagePreview.text}
-            onChange={handleChange}
+            theme="snow"
+            value={value}
+            onChange={setValue}
             className="custom-content"
           />
         </Form.Group>
@@ -137,8 +140,6 @@ function FormPost() {
           </Button>
         </Form.Group>
       </Form>
-
-      <DisplayBlogs />
     </Container>
   );
 }
