@@ -2,11 +2,8 @@ import React from "react";
 import { Container, Form, Button, FormGroup } from "react-bootstrap";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import { withRouter } from "react-router-dom";
-import { useHistory } from "react-router";
 
 function FormPost() {
-  const history = useHistory();
   const titleRef = React.createRef();
   const categoryRef = React.createRef();
   // const contentRef = React.createRef();
@@ -22,7 +19,6 @@ function FormPost() {
   // }
 
   async function handleSubmit(e) {
-    console.log(history);
     e.preventDefault();
     console.log();
 
@@ -53,7 +49,7 @@ function FormPost() {
     bodyMultipart.append("blogPic", image.file, image.file.name);
 
     const responseUpload = await fetch(
-      `http://localhost:3001/blogPosts/${jsonResponse.id}/uploadCover`,
+      `http://localhost:3001/blogPosts/${jsonResponse.id}/uploadCover/`,
       {
         method: "POST",
         headers: { Accept: "application/json" },
@@ -144,4 +140,4 @@ function FormPost() {
   );
 }
 
-export default withRouter(FormPost);
+export default FormPost;

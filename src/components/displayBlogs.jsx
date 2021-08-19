@@ -18,7 +18,7 @@ function DisplayBlogs() {
       <Row>
         {fetchedPosts.map((post) => {
           return (
-            <Col lg={4} md={4} sm={4} xs={4}>
+            <Col lg={4} md={4} sm={6} xs={6}>
               <div className="blog-div" key={post.id}>
                 <div>
                   <img
@@ -38,11 +38,9 @@ function DisplayBlogs() {
                   <Button
                     variant="outline-danger"
                     onClick={() =>
-                      fetch(`http://localhost:3001/blogPosts/${post.id}`, {
+                      fetch(`http://localhost:3001/blogPosts/${post.id}/`, {
                         method: "DELETE",
                       })
-                        .then((response) => response.json())
-                        .then((data) => console.log(data))
                     }
                   >
                     Delete
