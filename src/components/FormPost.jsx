@@ -2,7 +2,7 @@ import React from "react";
 import { Container, Form, Button, FormGroup } from "react-bootstrap";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-
+import { BACKEND_URL } from "../configs";
 function FormPost() {
   const titleRef = React.createRef();
   const categoryRef = React.createRef();
@@ -28,7 +28,7 @@ function FormPost() {
       content: value,
     };
 
-    const response = await fetch("http://localhost:3001/blogPosts", {
+    const response = await fetch(`${BACKEND_URL}/blogPosts`, {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -49,7 +49,7 @@ function FormPost() {
     bodyMultipart.append("blogPic", image.file, image.file.name);
 
     const responseUpload = await fetch(
-      `http://localhost:3001/blogPosts/${jsonResponse.id}/uploadCover/`,
+      `${BACKEND_URL}/blogPosts/${jsonResponse.id}/uploadCover/`,
       {
         method: "POST",
         headers: { Accept: "application/json" },

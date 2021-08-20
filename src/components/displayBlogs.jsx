@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
 import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
+import { BACKEND_URL } from "../configs";
 
 function DisplayBlogs() {
   const [fetchedPosts, setFetchedPosts] = useState([]);
 
   useEffect(() => {
-    const response = fetch("http://localhost:3001/blogPosts")
+    const response = fetch(`${BACKEND_URL}/blogPosts`)
       .then((response) => response.json())
       .then((data) => {
         setFetchedPosts(data);
@@ -38,7 +39,7 @@ function DisplayBlogs() {
                   <Button
                     variant="outline-danger"
                     onClick={() =>
-                      fetch(`http://localhost:3001/blogPosts/${post.id}/`, {
+                      fetch(`${BACKEND_URL}/blogPosts/${post.id}/`, {
                         method: "DELETE",
                       })
                     }
