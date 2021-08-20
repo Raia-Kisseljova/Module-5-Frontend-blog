@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback } from "react";
 import React from "react";
 import { Row, Col, Button } from "react-bootstrap";
 import { BACKEND_URL } from "../configs";
@@ -6,13 +6,21 @@ import { BACKEND_URL } from "../configs";
 function DisplayBlogs() {
   const [fetchedPosts, setFetchedPosts] = useState([]);
 
-  useEffect(() => {
-    const response = fetch(`${BACKEND_URL}/blogPosts`)
-      .then((response) => response.json())
-      .then((data) => {
+  const fetchPosts = useCallback(async () => {
+    try {
+      const response = await fetch(`${BACKEND_URL}/blogPosts`);
+      if (response.ok) {
+        const data = await response.json();
         setFetchedPosts(data);
-      });
-  }, [fetchedPosts]);
+      }
+    } catch (error) {
+      console.log(error);
+    }
+  }, [setFetchedPosts]);
+
+  useEffect(() => {
+    fetchPosts();
+  }, [fetchPosts]);
 
   return (
     <>
